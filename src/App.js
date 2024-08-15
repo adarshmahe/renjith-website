@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Link, Element } from 'react-scroll';
+import backgroundImage from './images/bg.png';
+import personImage from './images/bg-profile-positive.png';
+import About from './About';
+import './Fonts.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className="content">
+          <img src={personImage} alt="Person" className="person-image" />
+          <Link to="about" smooth={true} duration={1000}>
+            <button className="start-button">Start</button>
+          </Link>
+        </div>
+      </div>
+      <Element name="about" className="element">
+        <About />
+      </Element>
     </div>
   );
 }
