@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Element, scroller } from 'react-scroll';
 import { InView } from 'react-intersection-observer';
 import Modal from 'react-modal';
 import './About.css';
 import backgroundImage from './images/bg-profile-positive.png'; // Replace with your actual image path
 
-import image1 from './images/bg.jpg';
-import image2 from './images/bg-profile.jpg';
-import image3 from './images/profile-pic.jpg';
+import image1 from './images/work1.png';
+import image2 from './images/work2.png';
+import image3 from './images/work3.png';
 
 const scrollToNext = (currentSection) => {
 	const sections = [
@@ -20,6 +20,7 @@ const scrollToNext = (currentSection) => {
 		'details6',
 		'details7',
 		'details8',
+		'details9',
 	];
 	const currentIndex = sections.indexOf(currentSection);
 	const nextIndex = currentIndex + 1;
@@ -35,33 +36,73 @@ const scrollToNext = (currentSection) => {
 
 // Array of gallery items
 const galleryItems = [
-  { id: 'tile1', text: 'Tile 1', color: 'dark-purple', image: image1 },
-  { id: 'tile2', text: 'Tile 2', color: 'light-purple', image: image2 },
-  { id: 'tile3', text: 'Tile 3', color: 'dark-purple', image: image3 },
-  { id: 'tile4', text: 'Tile 4', color: 'light-purple', image: image1 },
-  { id: 'tile5', text: 'Tile 5', color: 'dark-purple', image: image2 },
-  { id: 'tile6', text: 'Tile 6', color: 'light-purple', image: image3 },
-  { id: 'tile7', text: 'Tile 7', color: 'dark-purple', image: image1 },
-  { id: 'tile8', text: 'Tile 8', color: 'light-purple', image: image2 },
-  { id: 'tile9', text: 'Tile 9', color: 'dark-purple', image: image3 },
+	{ id: 'tile1', text: 'Straumann® Dental Implant', color: 'dark-purple', image: image1 },
+	{ id: 'tile2', text: 'id food products', color: 'light-purple', image: image2 },
+	{ id: 'tile3', text: 'Metaverse EV Scooter Repair Training ', color: 'dark-purple', image: image3 },
+	{ id: 'tile4', text: 'aini branding', color: 'light-purple', image: image1 },
+	{ id: 'tile5', text: 'McDonald’s SRIW Project (Immersive design)', color: 'dark-purple', image: image2 },
+	{ id: 'tile6', text: 'Titan campaign', color: 'light-purple', image: image3 },
+	{ id: 'tile7', text: 'AIA Group Limited Insurance company', color: 'dark-purple', image: image1 },
+	{ id: 'tile8', text: 'MUSAFIR CAMPAIGN', color: 'light-purple', image: image2 },
+	{ id: 'tile9', text: 'ING Group Financial services corporation', color: 'dark-purple', image: image3 },
 ];
 
 function About() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [activeImage, setActiveImage] = useState(null);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [activeImage, setActiveImage] = useState(null);
+	const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
+	const [isCursorActive, setCursorActive] = useState(false);
+	const [isHoveringText, setHoveringText] = useState(false);
 
-  const openModal = (image) => {
-    setActiveImage(image);
-    setModalIsOpen(true);
-  };
+	const openModal = (image) => {
+		setActiveImage(image);
+		setModalIsOpen(true);
+	};
 
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setActiveImage(null);
-  };
+	const closeModal = () => {
+		setModalIsOpen(false);
+		setActiveImage(null);
+	};
+
+	const handleMouseMove = (e) => {
+		setCursorStyle({ top: e.clientY, left: e.clientX });
+	};
+
+	const handleMouseEnter = () => {
+		setCursorActive(true);
+	};
+
+	const handleMouseLeave = () => {
+		setCursorActive(false);
+		setHoveringText(false);
+	};
+
+	const handleTextMouseEnter = () => {
+		setHoveringText(true);
+	};
+
+	const handleTextMouseLeave = () => {
+		setHoveringText(false);
+	};
+
+	useEffect(() => {
+		window.addEventListener('mousemove', handleMouseMove);
+		return () => {
+			window.removeEventListener('mousemove', handleMouseMove);
+		};
+	}, []);
 
 	return (
 		<div>
+			<div
+				className={`cursor ${isCursorActive ? 'active' : ''} ${
+					isHoveringText ? 'hovering-text' : ''
+				}`}
+				style={{
+					top: cursorStyle.top,
+					left: cursorStyle.left,
+				}}
+			/>
 			<div
 				className='About'
 				style={{
@@ -69,6 +110,8 @@ function About() {
 					filter: 'invert(1)',
 				}}
 				onClick={() => scrollToNext('about')}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
 			>
 				<nav className='nav-links'>
 					<Link to='about' smooth={true} duration={1000}>
@@ -82,8 +125,18 @@ function About() {
 					</Link>
 				</nav>
 				<div className='about-content'>
-					<h1 className='heading'>RENJITH KARIPURAM</h1>
-					<p className='name-content'>
+					<h1
+						className='heading'
+						onMouseEnter={handleTextMouseEnter}
+						onMouseLeave={handleTextMouseLeave}
+					>
+						RENJITH KARIPURAM
+					</h1>
+					<p
+						className='name-content'
+						onMouseEnter={handleTextMouseEnter}
+						onMouseLeave={handleTextMouseLeave}
+					>
 						started <br></br>
 						my<br></br>
 						advertising <br></br>
@@ -99,6 +152,8 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details1')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='about-section section'
@@ -107,8 +162,18 @@ function About() {
 									filter: 'invert(1)',
 								}}
 							>
-								<h2 className='heading'>RENJITH KARIPURAM</h2>
-								<p className='name-content'>
+								<h2
+									className='heading'
+									onMouseEnter={handleTextMouseEnter}
+									onMouseLeave={handleTextMouseLeave}
+								>
+									RENJITH KARIPURAM
+								</h2>
+								<p
+									className='name-content'
+									onMouseEnter={handleTextMouseEnter}
+									onMouseLeave={handleTextMouseLeave}
+								>
 									After 10+<br></br> years,<br></br> I shifted<br></br> into
 									digital<br></br> products.
 								</p>
@@ -124,14 +189,24 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details2')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='section about-me'
 								style={{ backgroundColor: '#000' }}
 							>
 								<div className='content-wrapper'>
-									<h3>About me</h3>
-									<p>
+									<h3
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
+										About me
+									</h3>
+									<p
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
 										I am <b>a product designer</b>
 										<br></br> with <b>a strong focus</b> on the<br></br>{' '}
 										<b>visual design</b>
@@ -150,14 +225,24 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details3')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='section about-me'
 								style={{ backgroundColor: '#000' }}
 							>
 								<div className='content-wrapper'>
-									<h3>WHAT I DO?</h3>
-									<p>
+									<h3
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
+										WHAT I DO?
+									</h3>
+									<p
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
 										<ul>
 											<li>UI DESIGN</li>
 											<li>UX DESIGN </li>
@@ -182,14 +267,24 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details4')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='section about-me'
 								style={{ backgroundColor: '#000' }}
 							>
 								<div className='content-wrapper'>
-									<h3>EXPERIENCE</h3>
-									<p>
+									<h3
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
+										EXPERIENCE
+									</h3>
+									<p
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
 										oVER A DECADE OF<br></br> <b>EXPERIENCE IN DESIGN</b> AND
 										<br></br> WORKING WITH SOME OF THE<br></br> MOST TALENTED
 										PEOPLE IN<br></br> THE BUSINESS
@@ -207,13 +302,19 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details5')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='section about-me'
 								style={{ backgroundColor: '#000' }}
 							>
 								<div className='content-wrapper'>
-									<ul className='exp-list'>
+									<ul
+										className='exp-list'
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
 										<li>
 											<div className='first'>Now</div>
 											<div className='second'>
@@ -256,14 +357,24 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details6')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='section about-me'
 								style={{ backgroundColor: '#000' }}
 							>
 								<div className='content-wrapper'>
-									<h3>CLIENTS</h3>
-									<p>
+									<h3
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
+										CLIENTS
+									</h3>
+									<p
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
 										i WORKED WITH SOME OF THE MOST INNOVATIVE industry leaders
 										to help build their top-notch products
 									</p>
@@ -280,13 +391,19 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details7')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='section about-me'
 								style={{ backgroundColor: '#000' }}
 							>
 								<div className='content-wrapper'>
-									<ul className='exp-list'>
+									<ul
+										className='exp-list'
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
 										<li>
 											<div className='first'>2024</div>
 											<div className='second'>
@@ -349,13 +466,19 @@ function About() {
 							ref={ref}
 							className={`details ${inView ? 'visible' : ''}`}
 							onClick={() => scrollToNext('details8')}
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
 						>
 							<div
 								className='section about-me'
 								style={{ backgroundColor: '#000' }}
 							>
 								<div className='content-wrapper'>
-									<ul className='exp-list'>
+									<ul
+										className='exp-list'
+										onMouseEnter={handleTextMouseEnter}
+										onMouseLeave={handleTextMouseLeave}
+									>
 										<li>
 											<div className='first'>2022</div>
 											<div className='second'>
@@ -419,36 +542,51 @@ function About() {
 					)}
 				</InView>
 			</Element>
-      <Element name="details8" className="element">
-      <InView triggerOnce>
-        {({ inView, ref }) => (
-          <div ref={ref} className={`details ${inView ? 'visible' : ''}`}>
-            <div className="gallery-grid">
-              {galleryItems.map((item, index) => (
-                <div
-                  key={item.id}
-                  className={`gallery-tile ${item.color}`}
-                  onClick={() => openModal(item.image)}
-                >
-                  <span className="tile-text">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </InView>
+			<Element name='details9' className='element'>
+				<InView triggerOnce>
+					{({ inView, ref }) => (
+						<div ref={ref} className={`details ${inView ? 'visible' : ''}`}>
+							<div className='gallery-grid'>
+								{galleryItems.map((item, index) => (
+									<div
+										key={item.id}
+										className={`gallery-tile ${item.color}`}
+										onClick={() => {
+											openModal(item.image);
+											scrollToNext('details9');
+										}}
+										onMouseEnter={handleMouseEnter}
+										onMouseLeave={handleMouseLeave}
+									>
+										<span
+											className='tile-text'
+											onMouseEnter={handleTextMouseEnter}
+											onMouseLeave={handleTextMouseLeave}
+										>
+											{item.text}
+										</span>
+									</div>
+								))}
+							</div>
+						</div>
+					)}
+				</InView>
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Image Modal"
-        className="modal"
-        overlayClassName="overlay"
-      >
-        <button className="close-button" onClick={closeModal}>Close</button>
-        {activeImage && <img src={activeImage} alt="Gallery" className="modal-image" />}
-      </Modal>
-    </Element>
+				<Modal
+					isOpen={modalIsOpen}
+					onRequestClose={closeModal}
+					contentLabel='Image Modal'
+					className='modal'
+					overlayClassName='overlay'
+				>
+					<button className='close-button' onClick={closeModal}>
+						x
+					</button>
+					{activeImage && (
+						<img src={activeImage} alt='Gallery' className='modal-image' />
+					)}
+				</Modal>
+			</Element>
 		</div>
 	);
 }
