@@ -17,7 +17,7 @@ html, body, .gallery-grid, .gallery-tile, .details.visible, .start-button, .Abou
 }
 
 .nav-links {
-	position: absolute;
+	position: fixed;
 	top: 20px;
 	right: 20px;
 	display: flex;
@@ -25,10 +25,11 @@ html, body, .gallery-grid, .gallery-tile, .details.visible, .start-button, .Abou
 	gap: 20px;
 	text-transform: uppercase;
 	text-align: right;
+  z-index: 99;
 }
 
 .nav-links a {
-	color: #0000008f;
+	color: #8c8c8c;
 	text-decoration: none;
 	font-size: 16px;
 	transition: all 0.3s ease;

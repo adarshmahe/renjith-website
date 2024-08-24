@@ -36,15 +36,50 @@ const scrollToNext = (currentSection) => {
 
 // Array of gallery items
 const galleryItems = [
-	{ id: 'tile1', text: 'Straumann® Dental Implant', color: 'dark-purple', image: image1 },
-	{ id: 'tile2', text: 'id food products', color: 'light-purple', image: image2 },
-	{ id: 'tile3', text: 'Metaverse EV Scooter Repair Training ', color: 'dark-purple', image: image3 },
+	{
+		id: 'tile1',
+		text: 'Straumann® Dental Implant',
+		color: 'dark-purple',
+		image: image1,
+	},
+	{
+		id: 'tile2',
+		text: 'id food products',
+		color: 'light-purple',
+		image: image2,
+	},
+	{
+		id: 'tile3',
+		text: 'Metaverse EV Scooter Repair Training ',
+		color: 'dark-purple',
+		image: image3,
+	},
 	{ id: 'tile4', text: 'aini branding', color: 'light-purple', image: image1 },
-	{ id: 'tile5', text: 'McDonald’s SRIW Project (Immersive design)', color: 'dark-purple', image: image2 },
+	{
+		id: 'tile5',
+		text: 'McDonald’s SRIW Project (Immersive design)',
+		color: 'dark-purple',
+		image: image2,
+	},
 	{ id: 'tile6', text: 'Titan campaign', color: 'light-purple', image: image3 },
-	{ id: 'tile7', text: 'AIA Group Limited Insurance company', color: 'dark-purple', image: image1 },
-	{ id: 'tile8', text: 'MUSAFIR CAMPAIGN', color: 'light-purple', image: image2 },
-	{ id: 'tile9', text: 'ING Group Financial services corporation', color: 'dark-purple', image: image3 },
+	{
+		id: 'tile7',
+		text: 'AIA Group Limited Insurance company',
+		color: 'dark-purple',
+		image: image1,
+	},
+	{
+		id: 'tile8',
+		text: 'MUSAFIR CAMPAIGN',
+		color: 'light-purple',
+		image: image2,
+	},
+	{
+		id: 'tile9',
+		text: 'ING Group Financial services corporation',
+		color: 'dark-purple',
+		image: image3,
+	},
 ];
 
 function About() {
@@ -94,6 +129,18 @@ function About() {
 
 	return (
 		<div>
+			<nav className='nav-links' onMouseEnter={handleTextMouseEnter}
+						onMouseLeave={handleTextMouseLeave}>
+				<Link to='about' smooth={true} duration={1000}>
+					About
+				</Link>
+				<Link to='details7' smooth={true} duration={1000}>
+					Work
+				</Link>
+				<Link to='details2' smooth={true} duration={1000}>
+					Contact
+				</Link>
+			</nav>
 			<div
 				className={`cursor ${isCursorActive ? 'active' : ''} ${
 					isHoveringText ? 'hovering-text' : ''
@@ -113,17 +160,6 @@ function About() {
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 			>
-				<nav className='nav-links'>
-					<Link to='about' smooth={true} duration={1000}>
-						About
-					</Link>
-					<Link to='details1' smooth={true} duration={1000}>
-						Work
-					</Link>
-					<Link to='details2' smooth={true} duration={1000}>
-						Contact
-					</Link>
-				</nav>
 				<div className='about-content'>
 					<h1
 						className='heading'
