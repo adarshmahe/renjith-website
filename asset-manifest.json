@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/renjith-website/static/css/main.7302d19c.css",
+    "main.css": "/renjith-website/static/css/main.7da5a0e0.css",
     "main.js": "/renjith-website/static/js/main.120490db.js",
     "static/media/work1.png": "/renjith-website/static/media/work1.04fea1f45ec15f4db899.png",
     "static/media/work2.png": "/renjith-website/static/media/work2.dfd768359edfbf2f9124.png",
@@ -17,11 +17,11 @@
     "static/media/BentonSansBook.woff2": "/renjith-website/static/media/BentonSansBook.c3e67ba1559be216ff45.woff2",
     "static/media/BentonSansMedium.woff2": "/renjith-website/static/media/BentonSansMedium.e02c16f4d03206852842.woff2",
     "index.html": "/renjith-website/index.html",
-    "main.7302d19c.css.map": "/renjith-website/static/css/main.7302d19c.css.map",
+    "main.7da5a0e0.css.map": "/renjith-website/static/css/main.7da5a0e0.css.map",
     "main.120490db.js.map": "/renjith-website/static/js/main.120490db.js.map"
   },
   "entrypoints": [
-    "static/css/main.7302d19c.css",
+    "static/css/main.7da5a0e0.css",
     "static/js/main.120490db.js"
   ]
 }
